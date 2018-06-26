@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>用vuepress撸个blog | Lck.blog</title>
+    <meta name="description" content="Record what I want">
+    <link rel="icon" href="/lck.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/8.styles.f8af8f3c.css" as="style"><link rel="preload" href="/assets/js/app.c428904b.js" as="script"><link rel="preload" href="/assets/js/0.fc45fe58.js" as="script"><link rel="prefetch" href="/assets/js/5.e70cfc43.js"><link rel="prefetch" href="/assets/js/1.31b7c821.js"><link rel="prefetch" href="/assets/js/2.5b9e69fd.js"><link rel="prefetch" href="/assets/js/3.15823374.js"><link rel="prefetch" href="/assets/js/4.f51c65e9.js"><link rel="prefetch" href="/assets/js/6.5ce54886.js"><link rel="prefetch" href="/assets/js/7.21afd9eb.js">
+    <link rel="stylesheet" href="/assets/css/8.styles.f8af8f3c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Lck.blog
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Blog</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/vue/" class="nav-link router-link-exact-active router-link-active">Vue</a></li></ul></div></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Blog</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/vue/" class="nav-link router-link-exact-active router-link-active">Vue</a></li></ul></div></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span></span><!----></p><ul class="sidebar-group-items"><li><a href="/vue/" class="active sidebar-link">用vuepress撸个blog</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h1 id="用vuepress撸个blog"><a href="#用vuepress撸个blog" aria-hidden="true" class="header-anchor">#</a> 用vuepress撸个blog</h1><p>周末空闲弄了个域名，准备搭配github撸个bolg玩玩，刚好在微博看到尤大大弄了个vuepress写文档，
+这是一个基于Vue SSR的静态站生成器，本来是写文档的，但是我发现用来撸博客也行,于是我偷懒用的vuepress的源码来撸。</p><ol><li>安装vuepress</li></ol><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> -g vuepress
+</code></pre></div><ol start="2"><li>clone vuepress</li></ol><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> clone https://github.com/vuejs/vuepress.git
+</code></pre></div><ol start="3"><li>自己创建一个文件夹，然后初始化</li></ol><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">mkdir</span> blog 
+<span class="token function">npm</span> init 
+</code></pre></div><ol start="4"><li>把vuepress中的依赖和scripts复制到自己的pageage.json中，别忘记了engines也需要</li></ol><div class="tip custom-block"><p class="custom-block-title">提示</p><p>保持自己的node.js版本大于等于8</p></div><ol start="5"><li>把其他文件也复制进来</li></ol><div class="tip custom-block"><p class="custom-block-title">提示</p><p>可以去除掉一些不需要的</p></div><ol start="6"><li>在当前目录安装依赖</li></ol><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span>
+</code></pre></div><ol start="7"><li>运行即可</li></ol><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> run dev
+</code></pre></div><ol start="8"><li>剩下的就是替换docs里面的文件和配置config.js来写页面了，config.js中的配置在vuepress的官网中都有我就懒的写了。</li></ol><div class="tip custom-block"><p class="custom-block-title">提示</p><p>记得注释lib/default-theme/sidebar.vue 中的广告哦！</p></div></div><div class="page-edit"><!----><!----></div><!----><div class="bsa-cpc-wrapper"><div class="bsa-cpc"></div></div></div></div></div>
+    <script src="/assets/js/0.fc45fe58.js" defer></script><script src="/assets/js/app.c428904b.js" defer></script>
+  </body>
+</html>
