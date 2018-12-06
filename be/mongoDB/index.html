@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MongoDB数据库入门 | Lck.blog</title>
+    <meta name="description" content="record what I want">
+    <link rel="icon" href="/images/lck.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/15.styles.490a93ab.css" as="style"><link rel="preload" href="/assets/js/app.ea153e19.js" as="script"><link rel="preload" href="/assets/js/6.13af6b88.js" as="script"><link rel="prefetch" href="/assets/js/8.41a99780.js"><link rel="prefetch" href="/assets/js/1.658782a3.js"><link rel="prefetch" href="/assets/js/2.f973a849.js"><link rel="prefetch" href="/assets/js/3.15d78293.js"><link rel="prefetch" href="/assets/js/4.2d0270f1.js"><link rel="prefetch" href="/assets/js/5.fb778cbe.js"><link rel="prefetch" href="/assets/js/7.7ad7f298.js"><link rel="prefetch" href="/assets/js/9.794aee64.js"><link rel="prefetch" href="/assets/js/10.e4e6a294.js"><link rel="prefetch" href="/assets/js/11.ba2e67ae.js"><link rel="prefetch" href="/assets/js/12.b3b95a29.js"><link rel="prefetch" href="/assets/js/13.658d72aa.js"><link rel="prefetch" href="/assets/js/14.8533e45e.js">
+    <link rel="stylesheet" href="/assets/css/15.styles.490a93ab.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Lck.blog
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">前端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/fe/vue/" class="nav-link">vue</a></li><li class="dropdown-item"><!----><a href="/fe/webpack/" class="nav-link">webpack</a></li><li class="dropdown-item"><!----><a href="/fe/typescript/" class="nav-link">typescript</a></li><li class="dropdown-item"><!----><a href="/fe/miniprogram/" class="nav-link">小程序</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">后端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/be/node/" class="nav-link">node.js</a></li><li class="dropdown-item"><!----><a href="/be/mongoDB/" class="nav-link router-link-exact-active router-link-active">mongoDB</a></li><li class="dropdown-item"><!----><a href="/be/koa2/" class="nav-link">koa2</a></li><li class="dropdown-item"><!----><a href="/be/server/" class="nav-link">server</a></li></ul></div></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">前端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/fe/vue/" class="nav-link">vue</a></li><li class="dropdown-item"><!----><a href="/fe/webpack/" class="nav-link">webpack</a></li><li class="dropdown-item"><!----><a href="/fe/typescript/" class="nav-link">typescript</a></li><li class="dropdown-item"><!----><a href="/fe/miniprogram/" class="nav-link">小程序</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">后端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/be/node/" class="nav-link">node.js</a></li><li class="dropdown-item"><!----><a href="/be/mongoDB/" class="nav-link router-link-exact-active router-link-active">mongoDB</a></li><li class="dropdown-item"><!----><a href="/be/koa2/" class="nav-link">koa2</a></li><li class="dropdown-item"><!----><a href="/be/server/" class="nav-link">server</a></li></ul></div></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span></span><!----></p><ul class="sidebar-group-items"><li><a href="/be/mongoDB/" class="active sidebar-link">mongoDB入门</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/be/mongoDB/#_1-认识和安装mongodb" class="sidebar-link">1. 认识和安装mongoDB</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_2-存储结构和基础命令" class="sidebar-link">2. 存储结构和基础命令</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_3-用js文件写mongo命令" class="sidebar-link">3. 用js文件写mongo命令</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_4-批量插入数据" class="sidebar-link">4. 批量插入数据</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_5-update修改数据" class="sidebar-link">5. Update修改数据</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_6-状态返回与安全" class="sidebar-link">6. 状态返回与安全</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_7-find查找操作" class="sidebar-link">7. find查找操作</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_8-mongodb索引" class="sidebar-link">8. mongoDB索引</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_9-用户的创建、删除与修改" class="sidebar-link">9. 用户的创建、删除与修改</a></li><li class="sidebar-sub-header"><a href="/be/mongoDB/#_10-备份和还原" class="sidebar-link">10. 备份和还原</a></li></ul></li></ul></div></li></ul></div><div class="page"><div class="content"><h1 id="mongodb数据库入门"><a href="#mongodb数据库入门" aria-hidden="true" class="header-anchor">#</a> MongoDB数据库入门</h1><h2 id="_1-认识和安装mongodb"><a href="#_1-认识和安装mongodb" aria-hidden="true" class="header-anchor">#</a> 1. 认识和安装mongoDB</h2><h3 id="_1-1-mongodb简介"><a href="#_1-1-mongodb简介" aria-hidden="true" class="header-anchor">#</a> 1-1 MongoDB简介</h3><ul><li>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写。目的是为WEB应用提供扩展的高性能的数据存储解决方案。MongoDB是一个介于关系型数据库和非关系型数据库之间的产品，是非关系型数据库当中功能最丰富，最像关系数据库的。他支持的数据结构非常松散，是类似json的bson格式，因此可以存储比较复杂的数据类型。Mongo最大的特点是他支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。</li></ul><h3 id="_1-2-非关系数据库和关系型数据库的区别"><a href="#_1-2-非关系数据库和关系型数据库的区别" aria-hidden="true" class="header-anchor">#</a> 1-2 非关系数据库和关系型数据库的区别</h3><ol><li><strong>实质</strong>：非关系型数据库的实质：非关系型数据库产品是传统关系型数据库的功能阉割版，通过减少用不到或很少用的功能，来大幅度提高产品性能。</li><li><strong>价格</strong>：目前的非关系型数据库基本都是免费的，而比较有名气的关系型数据库都是收费的，比如：Oracle、DB2、MSSQL。MySql虽然是免费的，但是处理大型数据还是要提前作很多工作的。</li><li><strong>功能</strong>：实际开发中，很多业务需求，其实并不需要完整的关系型数据库功能，非关系型数据库的功能就足够使用了。这种情况下，使用性能更高、成本更低的非关系型数据库当然是更明智的选择。</li></ol><h3 id="_1-3-下载安装和配置环境变量"><a href="#_1-3-下载安装和配置环境变量" aria-hidden="true" class="header-anchor">#</a> 1-3  下载安装和配置环境变量</h3><ol><li>去<a href="https://www.mongodb.com" target="_blank" rel="noopener noreferrer">mongoDB官网<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>点击下载，然后在Community Server中选择对应的系统，点击下载即可</li><li>安装的时候选择Complete直接自动安装到C盘，然后取消勾选左侧的Install MongoDB Copmpass选项</li><li>在环境变量中添加对应的路径即可: 比如我的是C:\Program Files\MongoDB\Server\4.0\bin</li></ol><h3 id="_1-4-运行mongodb服务端"><a href="#_1-4-运行mongodb服务端" aria-hidden="true" class="header-anchor">#</a> 1-4  运行MongoDB服务端</h3><ol><li>在cmd中直接输入mongod启动服务，但是你会发现报错</li><li>在C盘根目录建立data文件夹，然后在data文件夹中创建db文件夹即可解决错误</li><li>在cmd中直接输入mongod启动服务,链接默认端口是27017</li><li>新建一个cmd,执行mongo</li><li>查看存在数据库命令：show dbs</li><li>查看数据库版本命令：db.version()</li></ol><h2 id="_2-存储结构和基础命令"><a href="#_2-存储结构和基础命令" aria-hidden="true" class="header-anchor">#</a> 2. 存储结构和基础命令</h2><h3 id="_2-1-存储结构"><a href="#_2-1-存储结构" aria-hidden="true" class="header-anchor">#</a> 2-1 存储结构</h3><table><thead><tr><th>mongoDB</th><th style="text-align:center">关系型数据库</th></tr></thead><tbody><tr><td>数据库</td><td style="text-align:center">数据库</td></tr><tr><td>集合</td><td style="text-align:center">数据表</td></tr><tr><td>文件</td><td style="text-align:center">数据行</td></tr></tbody></table><ul><li>关系型数据库的数据结构都是顶层是库，库下面是表，表下面是数据。但是MongoDB有所不同，库下面是集合，集合下面是文件</li></ul><h3 id="_2-2-基础命令"><a href="#_2-2-基础命令" aria-hidden="true" class="header-anchor">#</a> 2-2 基础命令</h3><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 在mongo中写如同写js一样</span>
+
+<span class="token comment">// 变量</span>
+<span class="token keyword">var</span> x<span class="token operator">=</span><span class="token string">'Hello World'</span><span class="token punctuation">;</span>
+<span class="token function">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 函数</span>
+<span class="token keyword">function</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">'Hello World'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 显示已有数据库，如果你刚安装好，会默认有local、admin(config)，这是默认数据库，我们在新建库时是不允许起这些名称的。</span>
+show dbs
+<span class="token comment">// 进入数据库。成功会显示：switched to db admin</span>
+use admin
+<span class="token comment">// 显示数据库中的集合, 关系型中叫表</span>
+show collections
+<span class="token comment">// 显示当前位置，也就是你当前使用的数据库名称，在作任何操作的时候都要先查看一下自己所在的库，以免造成操作错误。</span>
+db
+</code></pre></div><h3 id="_2-3-基础增删查改"><a href="#_2-3-基础增删查改" aria-hidden="true" class="header-anchor">#</a> 2-3 基础增删查改</h3><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// use不仅可以进入一个数据库，如果你敲入的库不存在，它还可以帮你建立一个库。但是在没有集合前，它还是默认为空</span>
+use demo
+
+<span class="token comment">// 新建数据集合和插入文件（数据），当集合没有时，这时候就可以新建一个集合，并向里边插入数据。</span>
+<span class="token comment">// db.user.insert({&quot;name&quot;:&quot;B1ackout&quot;})</span>
+db<span class="token punctuation">.</span>集合<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 查询所有数据，这条命令会列出集合下的所有数据，可以看到MongoDB是自动给我们加入了_id索引值的。</span>
+<span class="token comment">// db.user.find()</span>
+db<span class="token punctuation">.</span>集合<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 查询第一个文件数据，这里需要注意的，所有MongoDB的组合单词都使用首字母小写的驼峰式写法。</span>
+<span class="token comment">// db.user.findOne()</span>
+db<span class="token punctuation">.</span>集合<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 修改文件数据，第一个是查询条件，第二个是要修改成的值。这里注意的是可以多加文件数据项的</span>
+<span class="token comment">// db.user.update({&quot;name&quot;:&quot;B1ackout&quot;},{&quot;name&quot;:&quot;B1ackout&quot;,&quot;age&quot;:&quot;25&quot;})</span>
+db<span class="token punctuation">.</span>集合<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 删除文件数据，注意的是要跟一个条件。</span>
+<span class="token comment">// db.user.remove({&quot;name&quot;:&quot;B1ackout&quot;})</span>
+db<span class="token punctuation">.</span>集合<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 删除整个集合</span>
+<span class="token comment">// db.user.drop()</span>
+db<span class="token punctuation">.</span>集合<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 删除整个数据库，在删除库时，一定要先进入数据库，然后再删除</span>
+<span class="token comment">// db.dropDatabase()</span>
+db<span class="token punctuation">.</span><span class="token function">dropDatabase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_3-用js文件写mongo命令"><a href="#_3-用js文件写mongo命令" aria-hidden="true" class="header-anchor">#</a> 3. 用js文件写mongo命令</h2><p>新建一个task.js,</p><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 启动mongod和mongo</span>
+<span class="token comment">// 用户名</span>
+<span class="token keyword">let</span> userName <span class="token operator">=</span> <span class="token string">'B1ackout'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 生成时间戳</span>
+<span class="token keyword">let</span> timeStamp <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 设置json</span>
+<span class="token keyword">let</span> jsonDatabase <span class="token operator">=</span> <span class="token punctuation">{</span>
+    userName<span class="token punctuation">,</span>
+    timeStamp
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 链接数据库</span>
+<span class="token keyword">let</span> db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'log'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 插入数据</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>jsonDatabase<span class="token punctuation">)</span>
+
+<span class="token comment">// 插入后打印成功，如果报错，把let换成var，低版本mongoDB不兼容es6代码</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">'print success'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 执行js, 或者在mongo中执行load('./task.js')</span>
+mongo task<span class="token punctuation">.</span>js
+
+<span class="token comment">// show dbs查看是不是有个log集合</span>
+show dbs
+
+<span class="token comment">// show collections会显示user</span>
+show collections
+
+<span class="token comment">// db.user.find()会显示刚才插入的数据</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_4-批量插入数据"><a href="#_4-批量插入数据" aria-hidden="true" class="header-anchor">#</a> 4. 批量插入数据</h2><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 插入数组即可</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">&quot;_id&quot;</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;_id&quot;</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">&quot;_id&quot;</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 那到底是循环插入快，还是批量插入快呢？</span>
+<span class="token comment">// 得到开始时间</span>
+<span class="token keyword">let</span> startTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token comment">// 链接数据库</span>
+<span class="token keyword">let</span>  db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'log'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+<span class="token comment">// 循环插入</span>
+<span class="token comment">// for(let i=0;i&lt;1000;i++){</span>
+<span class="token comment">//     db.user.insert({num:i});</span>
+<span class="token comment">// }</span>
+
+<span class="token comment">// 批量插入,先声明一个数组</span>
+<span class="token keyword">let</span> tempArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>              
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token comment">// 循环向数组中放入值       </span>
+    tempArray<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>num<span class="token punctuation">:</span>i<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 批量一次插入</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>tempArray<span class="token punctuation">)</span>       
+
+<span class="token comment">// 计算时间差</span>
+<span class="token keyword">let</span> runTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">;</span>
+
+<span class="token comment">// 打印出来， 批量一次插入会快很多</span>
+<span class="token function">print</span> <span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>runTimems<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">ms`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">操作数据库时要注意</p><ul><li>第一个是快速存储能力。</li><li>第二个是方便迅速查询能力。</li></ul></div><h2 id="_5-update修改数据"><a href="#_5-update修改数据" aria-hidden="true" class="header-anchor">#</a> 5. Update修改数据</h2><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 链接数据库</span>
+<span class="token keyword">let</span> db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'log'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 设置数据</span>
+<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">'B1ackout'</span><span class="token punctuation">,</span>
+    age<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    sex<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    job<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    skill<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        skillOne<span class="token punctuation">:</span> <span class="token string">'one'</span><span class="token punctuation">,</span>
+        SkillTwo<span class="token punctuation">:</span> <span class="token string">'Two'</span><span class="token punctuation">,</span>
+        SkillThree<span class="token punctuation">:</span> <span class="token string">'Three'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    regeditTime<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// --------------------------------------基础修改</span>
+<span class="token comment">// 插入数据</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+<span class="token comment">// $set,使用$set来修改</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string">&quot;$set&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token number">25</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $set,修改内部值</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;skill.skillThree&quot;</span><span class="token punctuation">:</span> <span class="token string">'TypeScript'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $unset,删除一个key值和键</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $unset<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;age&quot;</span><span class="token punctuation">:</span> <span class="token string">''</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $set,增加回去，此时是有B1ackout这个字段的</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;age&quot;</span><span class="token punctuation">:</span> <span class="token number">20</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $inc,它是对value值的修改，但是修改的必须是数字, 相当于age这个字段减2</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $inc<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;age&quot;</span><span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">2</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// multi,多个数据同时增加一个属性,true代表全部修改,默认false代表只修改一个</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> interset<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> multi<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// upsert, 新增一个data, upsert是在找不到B1ackout2的情况下，直接插入这条数据</span>
+<span class="token comment">// 如果db.user.update({name:'B1ackout2'},{$set:{age:20}})是没有用的，因为没有插入过B1ackout2</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout2'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token number">20</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> upsert<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ------------------------------------------------数组修改</span>
+<span class="token comment">// $push,添加数组</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout2'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $push<span class="token punctuation">:</span> <span class="token punctuation">{</span> arr<span class="token punctuation">:</span> <span class="token string">'arr1'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 内嵌添加</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $push<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;skill.skillFour&quot;</span><span class="token punctuation">:</span> <span class="token string">'mongoDB'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $ne,查找是否存在, 检查一个值是否存在，如果不存在再执行操作，存在就不执行</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout'</span><span class="token punctuation">,</span> <span class="token string">&quot;interest&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> $ne<span class="token punctuation">:</span> <span class="token string">'playGame'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $push<span class="token punctuation">:</span> <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token string">'Game'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $addToSet, 查找是否存在，不存在就push上去</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $addToSet<span class="token punctuation">:</span> <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token string">&quot;readBook&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $each 批量追加</span>
+<span class="token keyword">let</span> newInterset <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&quot;Sing&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Dance&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Code&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">&quot;B1ackout&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $addToSet<span class="token punctuation">:</span> <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token punctuation">{</span> $each<span class="token punctuation">:</span> newInterset <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $pop 删除数组值, $pop只删除一次，并不是删除所有数组中的值。而且它有两个选项，一个是1和-1。</span>
+<span class="token comment">// 1: 从数组末端进行删除</span>
+<span class="token comment">// 2: 从数组开端进行删除</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $pop<span class="token punctuation">:</span> <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 数组定位修改, 计数是从0开始的</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;interest.2&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Code&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">'success'</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_6-状态返回与安全"><a href="#_6-状态返回与安全" aria-hidden="true" class="header-anchor">#</a> 6. 状态返回与安全</h2><ul><li>应答式写入就会给我们直接返回结果，结果里边的包含项会很多，这样我们就可以很好的进行程序的控制和安全机制的处理。</li></ul><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 找到所有sex为1， 添加一个money等于1000的属性,</span>
+<span class="token comment">// false是upsert的简写，代表没有此条数据时不增加</span>
+<span class="token comment">// true是multi的简写，代表修改所有</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> sex<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> money<span class="token punctuation">:</span> <span class="token number">1000</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 返回数据库结果给我, getLastError:1表示返回功能错误</span>
+<span class="token keyword">let</span> resultMessage <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">runCommand</span><span class="token punctuation">(</span><span class="token punctuation">{</span> getLastError<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 以json对象的格式输出到控制台</span>
+<span class="token function">printjson</span><span class="token punctuation">(</span>resultMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 这样写更加直观</span>
+<span class="token keyword">let</span> modify <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 要修改的合集</span>
+    findAndModify<span class="token punctuation">:</span> <span class="token string">&quot;user&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// 需要查询的条件/文档</span>
+    query<span class="token punctuation">:</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'B1ackout'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 更新属性</span>
+    update<span class="token punctuation">:</span> <span class="token punctuation">{</span> $<span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token number">18</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 更新完成，需要查看结果，如果为false不进行查看结果</span>
+    <span class="token keyword">new</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> ResultMessage <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">runCommand</span><span class="token punctuation">(</span>modify<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">printjson</span><span class="token punctuation">(</span>ResultMessage<span class="token punctuation">)</span>
+</code></pre></div><h2 id="_7-find查找操作"><a href="#_7-find查找操作" aria-hidden="true" class="header-anchor">#</a> 7. find查找操作</h2><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 链接数据库</span>
+<span class="token keyword">let</span> db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'log'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token comment">// 添加10条数据</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> index <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> index<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`B1ackout</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>index<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span>
+        age<span class="token punctuation">:</span> index<span class="token punctuation">,</span>
+        sex<span class="token punctuation">:</span> index<span class="token punctuation">,</span>
+        job<span class="token punctuation">:</span> index<span class="token punctuation">,</span>
+        skill<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            skillOne<span class="token punctuation">:</span> index<span class="token punctuation">,</span>
+            SkillTwo<span class="token punctuation">:</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            SkillThree<span class="token punctuation">:</span> index <span class="token operator">+</span> <span class="token number">2</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        regeditTime<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        interest<span class="token punctuation">:</span>
+            index <span class="token operator">&gt;=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> index <span class="token operator">&lt;=</span> <span class="token number">3</span>
+                <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">,</span> <span class="token string">'play'</span><span class="token punctuation">,</span> <span class="token string">'book'</span><span class="token punctuation">]</span>
+                <span class="token punctuation">:</span> index <span class="token operator">&gt;=</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> index <span class="token operator">&lt;=</span> <span class="token number">6</span>
+                    <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token string">'play'</span><span class="token punctuation">,</span> <span class="token string">'book'</span><span class="token punctuation">]</span>
+                    <span class="token punctuation">:</span> index <span class="token operator">&gt;=</span> <span class="token number">7</span> <span class="token operator">&amp;&amp;</span> index <span class="token operator">&lt;=</span> <span class="token number">10</span>
+                        <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token string">'book'</span><span class="token punctuation">]</span>
+                        <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;success push&quot;</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ---------------------------------------------------不等修饰符</span>
+
+<span class="token comment">// 查找skill.skillOne等于0的,会返回完整的数据,load这个js只会返回true,直接终端中输入即可</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 只返回需要的字段，并且把mongoDB默认返回的id去除掉</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// 不等修饰符</span>
+<span class="token comment">// 小于($lt)</span>
+<span class="token comment">// 小于等于($lte)</span>
+<span class="token comment">// 大于($gt)</span>
+<span class="token comment">// 大于等于($gte)</span>
+<span class="token comment">// 不等于($ne)</span>
+<span class="token comment">// 比如查找age大于等于0，小于等于5的</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token punctuation">{</span> $lte<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> $gte<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// 查找日期大于2018/01/01日的数据</span>
+<span class="token keyword">let</span> startDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'01/01/2018'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> regeditTime<span class="token punctuation">:</span> <span class="token punctuation">{</span> $gt<span class="token punctuation">:</span> startDate <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ---------------------------------------------------多条件查询</span>
+
+<span class="token comment">// $in修饰符,一键多值的查询,查找age等于0和5</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token punctuation">{</span> $<span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $nin修饰符,查找age不等于0和5</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token punctuation">{</span> $nin<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $or修饰符,查询多个键值,或者查询,等于js || </span>
+<span class="token comment">// 查询age大于等于5或者skill.skillOne为5的值</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> $or<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token punctuation">{</span> $gte<span class="token punctuation">:</span> <span class="token number">5</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $and修饰符,查询多个键值,并且查询,等于js &amp;&amp; </span>
+<span class="token comment">// 查询age大于等于5并且skill.skillOne为5的值</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> $and<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token punctuation">{</span> $gte<span class="token punctuation">:</span> <span class="token number">5</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $not修饰符,查询除条件之外的值</span>
+<span class="token comment">// 查询age在0-5之外的数据</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token punctuation">{</span> $not<span class="token punctuation">:</span> <span class="token punctuation">{</span> $gte<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> $lte<span class="token punctuation">:</span> <span class="token number">5</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;skill.skillOne&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ---------------------------------------------------数组查询</span>
+
+<span class="token comment">// 查找interest中完全匹配'code', 'play', 'book'的数据</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">,</span> <span class="token string">'play'</span><span class="token punctuation">,</span> <span class="token string">'book'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> interest<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// 查找包含book的数据</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token string">'book'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> interest<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $all-数组多项查询,查询出book和play的</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token punctuation">{</span> $all<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;book&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;play&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> interest<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $in-数组的或者查询,满足数组中的一项就可以被查出来</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token punctuation">{</span> $<span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;play&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> interest<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $size-数组个数查询,查找interest只有一个数据的信息</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span> interest<span class="token punctuation">:</span> <span class="token punctuation">{</span> $size<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> interest<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// $slice-显示选项，只显示interest第一项</span>
+<span class="token comment">// 显示第一项和最后一项</span>
+<span class="token comment">// { name: true, interest: { $slice: -1 }, age: true, _id: false }</span>
+<span class="token comment">// { name: true, interest: { $slice: [ 0, 1 ] }, age: true, _id: false }</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> interest<span class="token punctuation">:</span> <span class="token punctuation">{</span> $slice<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ---------------------------------------------------find的参数</span>
+
+<span class="token comment">// 默认查找所有的数据，然后每页只显示2个数据，从最开始查找，排序为从小到大</span>
+<span class="token comment">// 第一个参数为query 查询条件</span>
+<span class="token comment">// 第二个为fields 返回内容</span>
+<span class="token comment">// limit 控制返回长度</span>
+<span class="token comment">// skip 跳过的长度</span>
+<span class="token comment">// sort 排序 1为从小到大, -1为从大到小</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">limit</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">skip</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">{</span> age<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// $where修饰符,查询age大于5的数据</span>
+<span class="token comment">// this指向的是查询集合(user)本身</span>
+db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> $where<span class="token punctuation">:</span> <span class="token string">&quot;this.age &gt; 5&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> _id<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ---------------------------------------------------find在js中使用</span>
+
+<span class="token keyword">let</span> db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">&quot;log&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> result <span class="token operator">=</span> db<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// forEach函数</span>
+result<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>result <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">printjson</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 利用游标的hasNext()进行循环输出结果。load这个js即可</span>
+<span class="token comment">// while (result.hasNext()) {</span>
+<span class="token comment">//     printjson(result.next())</span>
+<span class="token comment">// }</span>
+
+</code></pre></div><h2 id="_8-mongodb索引"><a href="#_8-mongodb索引" aria-hidden="true" class="header-anchor">#</a> 8. mongoDB索引</h2><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 生成100W条数据</span>
+<span class="token comment">// 随机数</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getRandomNum</span> <span class="token operator">=</span> <span class="token punctuation">(</span>min<span class="token punctuation">,</span> max<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 得到随机数区间</span>
+    <span class="token keyword">let</span> range <span class="token operator">=</span> max <span class="token operator">-</span> min<span class="token punctuation">;</span>   
+    <span class="token comment">// 得到随机值</span>
+    <span class="token keyword">let</span> rand <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token comment">// 最小值+随机数取整</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>min <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span>rand <span class="token operator">*</span> range<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 随机用户名</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getRadomUserName</span> <span class="token operator">=</span> <span class="token punctuation">(</span>min<span class="token punctuation">,</span> max<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> tempStringArray <span class="token operator">=</span> <span class="token string">&quot;123456789qwertyuiopasdfghjklzxcvbnm&quot;</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> outPuttext <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span> 
+    <span class="token comment">// 生成随机用户名</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span>min<span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        outPuttext <span class="token operator">+=</span> tempStringArray<span class="token punctuation">[</span><span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> tempStringArray<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> outPuttext<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'userinfo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> tempInfo <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    tempInfo<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        username<span class="token punctuation">:</span> <span class="token function">getRadomUserName</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        regeditTime<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum0<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum1<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum2<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum3<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum4<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum5<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum6<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum7<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum8<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        randNum8<span class="token punctuation">:</span> <span class="token function">getRandomNum</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">,</span> <span class="token number">999999</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>tempInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 查看数据中的数据条数</span>
+db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">stats</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// index.js普通查询性能</span>
+<span class="token keyword">var</span> startTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> db <span class="token operator">=</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'userinfo'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 根据用户名查找用户</span>
+<span class="token keyword">var</span> rs <span class="token operator">=</span> db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token punctuation">:</span> <span class="token string">&quot;tfruhjy8k&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+rs<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>rs <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token function">printjson</span><span class="token punctuation">(</span>rs<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> runTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">;</span>
+
+<span class="token comment">// 打印查找时间</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`[SUCCESS]This run time is: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>runTime<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> ms`</span></span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 建立username索引,index.js中是根据username来查找的</span>
+db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">ensureIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 再次执行上面的js</span>
+<span class="token function">load</span><span class="token punctuation">(</span><span class="token string">'./index.js'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 查看现有索引, 现在有两条索引,一个mongo自带的_id，一个设置的username</span>
+db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">getIndexes</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 建立复合索引</span>
+<span class="token keyword">var</span> rs <span class="token operator">=</span> db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token punctuation">:</span> <span class="token string">&quot;e1qzoquku&quot;</span><span class="token punctuation">,</span> randNum0<span class="token punctuation">:</span> <span class="token number">446568</span><span class="token punctuation">,</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 指定索引查询（hint）</span>
+<span class="token keyword">var</span> rs <span class="token operator">=</span> db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token punctuation">:</span> <span class="token string">&quot;e1qzoquku&quot;</span><span class="token punctuation">,</span> randNum0<span class="token punctuation">:</span> <span class="token number">446568</span><span class="token punctuation">,</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hint</span><span class="token punctuation">(</span><span class="token punctuation">{</span> randNum0<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 删除索引,根据索引的name字段来删除</span>
+db<span class="token punctuation">.</span>randomInfo<span class="token punctuation">.</span><span class="token function">dropIndex</span><span class="token punctuation">(</span><span class="token string">'randNum0_1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">提示</p><ol><li>数据不超万条时，不需要使用索引。性能的提升并不明显，而大大增加了内存和硬盘的消耗。</li><li>查询数据超过表数据量30%时，不要使用索引字段查询。实际证明会比不使用索引更慢，因为它大量检索了索引表和我们原表。</li><li>数字索引，要比字符串索引快的多，在百万级甚至千万级数据量面前，使用数字索引是个明确的选择。</li><li>把你经常查询的数据做成一个内嵌数据（对象型的数据），然后集体进行索引。</li></ol></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 全文索引</span>
+<span class="token comment">// 插入两条数据</span>
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">{</span> content<span class="token punctuation">:</span> <span class="token string">&quot;I am a programmer, I love life, love family. Every day after work, I write a diary.&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">{</span> content<span class="token punctuation">:</span> <span class="token string">&quot;I am a programmer, I love PlayGame, love drink. Every day after work, I playGame and drink.&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 建立全文索引</span>
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">ensureIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> content<span class="token punctuation">:</span> <span class="token string">'text'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 查找</span>
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> $text<span class="token punctuation">:</span> <span class="token punctuation">{</span> $search<span class="token punctuation">:</span> <span class="token string">&quot;programmer&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 查找多个词, ||的意思</span>
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> $text<span class="token punctuation">:</span> <span class="token punctuation">{</span> $search<span class="token punctuation">:</span> <span class="token string">&quot;programmer family diary drink&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 查找非drink的数据，用减号来删除条件</span>
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> $text<span class="token punctuation">:</span> <span class="token punctuation">{</span> $search<span class="token punctuation">:</span> <span class="token string">&quot;programmer family diary -drink&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 转义符</span>
+db<span class="token punctuation">.</span>article<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span> $text<span class="token punctuation">:</span> <span class="token punctuation">{</span> $search<span class="token punctuation">:</span> <span class="token string">&quot;\&quot;love PlayGame\&quot; drink&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_9-用户的创建、删除与修改"><a href="#_9-用户的创建、删除与修改" aria-hidden="true" class="header-anchor">#</a> 9. 用户的创建、删除与修改</h2><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/*
+    内置角色：
+    数据库用户角色：read、readWrite；
+    数据库管理角色：dbAdmin、dbOwner、userAdmin;
+    集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManage；
+    备份恢复角色：backup、restore；
+    所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase
+    超级用户角色：root
+    内部角色：__system
+*/</span>
+
+<span class="token comment">// 先启动服务mongod服务，然后mongo之后use admin进去之后创建用户</span>
+db<span class="token punctuation">.</span><span class="token function">createUser</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    user<span class="token punctuation">:</span> <span class="token string">'admin'</span><span class="token punctuation">,</span>
+    pwd<span class="token punctuation">:</span> <span class="token string">'123456'</span><span class="token punctuation">,</span>
+    customData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;lck&quot;</span><span class="token punctuation">,</span>
+        email<span class="token punctuation">:</span> <span class="token string">'459842239@qq.com'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    roles<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            role<span class="token punctuation">:</span> <span class="token string">'readWrite'</span><span class="token punctuation">,</span>
+            db<span class="token punctuation">:</span> <span class="token string">'userinfo'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 创建后查找用户信息</span>
+db<span class="token punctuation">.</span>system<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 使用remove来删除用户</span>
+db<span class="token punctuation">.</span>system<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">{</span> user<span class="token punctuation">:</span> <span class="token string">&quot;admin&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 创建完成后建权</span>
+db<span class="token punctuation">.</span><span class="token function">auth</span><span class="token punctuation">(</span><span class="token string">&quot;admin&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;123456&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 重启mongod，--auth代表需要帐号密码登录</span>
+mongod <span class="token operator">--</span>auth
+
+<span class="token comment">// 现在使用mongo这个命令是无法访问的, 需要登录带账户密码</span>
+mongo <span class="token operator">-</span>u admin <span class="token operator">-</span>p <span class="token number">123456</span> <span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">27017</span><span class="token operator">/</span>admin
+</code></pre></div><h2 id="_10-备份和还原"><a href="#_10-备份和还原" aria-hidden="true" class="header-anchor">#</a> 10. 备份和还原</h2><div class="language- extra-class"><pre class="language-text"><code>// 备份
+mongodump
+    --host 127.0.0.1
+    --port 27017
+    --out D:/databack/backup
+    --collection myCollections
+    --db test
+    --username username
+    --password password
+
+// 备份到backup文件夹下面
+mongodump --host 127.0.0.1 --port 27017 --out D:/backup/
+
+// 还原
+mongorestore
+    --host 127.0.0.1
+    --port 27017
+    --username username
+    --password password
+    &lt;path to the backup&gt;
+
+// 假如不小心删除了randomInfo这个集合
+db.randomInfo.drop()
+
+// 使用命令进行恢复
+mongorestore --host 127.0.0.1 --port 27017 D:/databack/
+</code></pre></div></div><div class="page-edit"><!----><!----></div><!----><div class="bsa-cpc-wrapper"><div class="bsa-cpc"></div></div></div></div></div>
+    <script src="/assets/js/6.13af6b88.js" defer></script><script src="/assets/js/app.ea153e19.js" defer></script>
+  </body>
+</html>
