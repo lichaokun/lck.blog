@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1. props和$emit | Lck.blog</title>
+    <meta name="description" content="record what I want">
+    <link rel="icon" href="/images/lck.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/24.styles.e0d6c755.css" as="style"><link rel="preload" href="/assets/js/app.468cdc48.js" as="script"><link rel="preload" href="/assets/js/16.a18a4318.js" as="script"><link rel="prefetch" href="/assets/js/12.5d18d4a4.js"><link rel="prefetch" href="/assets/js/1.658782a3.js"><link rel="prefetch" href="/assets/js/2.3cfad940.js"><link rel="prefetch" href="/assets/js/3.15d78293.js"><link rel="prefetch" href="/assets/js/4.de20d262.js"><link rel="prefetch" href="/assets/js/5.428891b7.js"><link rel="prefetch" href="/assets/js/6.ec331aab.js"><link rel="prefetch" href="/assets/js/7.83652294.js"><link rel="prefetch" href="/assets/js/8.8af98595.js"><link rel="prefetch" href="/assets/js/9.8896acda.js"><link rel="prefetch" href="/assets/js/10.5925f10a.js"><link rel="prefetch" href="/assets/js/11.b6889036.js"><link rel="prefetch" href="/assets/js/13.3979a272.js"><link rel="prefetch" href="/assets/js/14.66dc2249.js"><link rel="prefetch" href="/assets/js/15.4a14ad22.js"><link rel="prefetch" href="/assets/js/17.f09a6665.js"><link rel="prefetch" href="/assets/js/18.b97082cf.js"><link rel="prefetch" href="/assets/js/19.4745503f.js"><link rel="prefetch" href="/assets/js/20.30a71639.js"><link rel="prefetch" href="/assets/js/21.35b85b03.js"><link rel="prefetch" href="/assets/js/22.75370661.js"><link rel="prefetch" href="/assets/js/23.62177a21.js">
+    <link rel="stylesheet" href="/assets/css/24.styles.e0d6c755.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Lck.blog
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">前端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/fe/js/" class="nav-link">js</a></li><li class="dropdown-item"><!----><a href="/fe/vue/" class="nav-link router-link-active">vue</a></li><li class="dropdown-item"><!----><a href="/fe/react/" class="nav-link">react</a></li><li class="dropdown-item"><!----><a href="/fe/wx/" class="nav-link">wx</a></li><li class="dropdown-item"><!----><a href="/fe/tool/" class="nav-link">构建工具</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">后端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/be/node/" class="nav-link">nodejs</a></li><li class="dropdown-item"><!----><a href="/be/db/" class="nav-link">数据库</a></li><li class="dropdown-item"><!----><a href="/be/server/" class="nav-link">服务器</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">其他</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/other/interview/" class="nav-link">面试</a></li></ul></div></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">前端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/fe/js/" class="nav-link">js</a></li><li class="dropdown-item"><!----><a href="/fe/vue/" class="nav-link router-link-active">vue</a></li><li class="dropdown-item"><!----><a href="/fe/react/" class="nav-link">react</a></li><li class="dropdown-item"><!----><a href="/fe/wx/" class="nav-link">wx</a></li><li class="dropdown-item"><!----><a href="/fe/tool/" class="nav-link">构建工具</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">后端</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/be/node/" class="nav-link">nodejs</a></li><li class="dropdown-item"><!----><a href="/be/db/" class="nav-link">数据库</a></li><li class="dropdown-item"><!----><a href="/be/server/" class="nav-link">服务器</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">其他</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/other/interview/" class="nav-link">面试</a></li></ul></div></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span></span><!----></p><ul class="sidebar-group-items"><li><a href="/fe/vue/" class="sidebar-link">双向绑定原理</a></li><li><a href="/fe/vue/components.html" class="active sidebar-link">组件通信的几种方式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_1-props和-emit" class="sidebar-link">1. props和$emit</a></li><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_2-attrs和-listeners" class="sidebar-link">2. $attrs和$listeners</a></li><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_3-event-bus中间站" class="sidebar-link">3. Event Bus中间站</a></li><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_4-provide-inject" class="sidebar-link">4. provide/inject</a></li><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_5-v-model" class="sidebar-link">5. v-model</a></li><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_6-ref-parent-children" class="sidebar-link">6. ref/$parent/$children</a></li><li class="sidebar-sub-header"><a href="/fe/vue/components.html#_7-boradcast-dispatch" class="sidebar-link">7. boradcast/dispatch</a></li></ul></li><li><a href="/fe/vue/seniorCom.html" class="sidebar-link">如何编写高级组件</a></li><li><a href="/fe/vue/ssr.html" class="sidebar-link">服务端渲染入门</a></li><li><a href="/fe/vue/vuePress.html" class="sidebar-link">VuePress撸blog</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h2 id="_1-props和-emit"><a href="#_1-props和-emit" aria-hidden="true" class="header-anchor">#</a> 1. props和$emit</h2><p>基础父子组件传递信息通过props和$emit</p><div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'B'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span><span class="token keyword">this</span><span class="token punctuation">.</span>message
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;mymessage&quot; @input=&quot;passData(mymessage)&quot;&gt; &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    props<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'message'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token comment">// 得到父组件传递过来的数据</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token function">passData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//触发父组件中的事件</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'getChildData'</span><span class="token punctuation">,</span>val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is A compoent!&lt;/p&gt;
+            &lt;B :message=&quot;message&quot; @getChildData=&quot;getChildData&quot;&gt;&lt;/B&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            message<span class="token punctuation">:</span><span class="token string">'hello'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token comment">//执行子组件触发的事件</span>
+        <span class="token function">getChildData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;A&gt;&lt;/A&gt;
+        &lt;/div&gt;
+    `</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_2-attrs和-listeners"><a href="#_2-attrs和-listeners" aria-hidden="true" class="header-anchor">#</a> 2. $attrs和$listeners</h2><p>如果父组件 A 下面有子组件 B，组件 B 下面有组件 C，这时如果组件 A 想传递数据给组件C怎么办呢？</p><div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`&lt;div&gt;&lt;input type=&quot;text&quot; v-model=&quot;$attrs.messagec&quot; @input=&quot;passCData($attrs.messagec)&quot;&gt; &lt;/div&gt;`</span></span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">passCData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">//触发父组件A中的事件</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'getCData'</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>message
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;mymessage&quot; @input=&quot;passData(mymessage)&quot;&gt; 
+            &lt;!-- C组件中能直接触发getCData的原因在于 B组件调用C组件时 使用 v-on 绑定了$listeners 属性 --&gt;
+            &lt;!-- 通过v-bind 绑定$attrs属性，C组件可以直接获取到A组件中传递下来的props（除了B组件中props声明的） --&gt;
+            &lt;C v-bind=&quot;$attrs&quot; v-on=&quot;$listeners&quot;&gt;&lt;/C&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+
+    props<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'message'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">//得到父组件传递过来的数据</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">passData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//触发父组件中的事件</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'getChildData'</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is parent compoent!&lt;/p&gt;
+            &lt;B :messagec=&quot;messagec&quot; :message=&quot;message&quot; @getCData=&quot;getCData&quot; @getChildData=&quot;getChildData(message)&quot;&gt;&lt;/B&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            message<span class="token punctuation">:</span> <span class="token string">'hello'</span><span class="token punctuation">,</span>
+            messagec<span class="token punctuation">:</span> <span class="token string">'hello c'</span>
+            <span class="token comment">//传递给c组件的数据</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">getChildData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'这是来自B组件的数据'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment">// 执行C子组件触发的事件</span>
+        <span class="token function">getCData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;这是来自C组件的数据：&quot;</span> <span class="token operator">+</span> val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`&lt;div&gt;&lt;A&gt;&lt;/A&gt;&lt;/div&gt;`</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_3-event-bus中间站"><a href="#_3-event-bus中间站" aria-hidden="true" class="header-anchor">#</a> 3. Event Bus中间站</h2><div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'brother1'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span><span class="token string">'hello brother1'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is brother1 compoent!&lt;/p&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;mymessage&quot; @input=&quot;passData(mymessage)&quot;&gt; 
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token function">passData</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// 触发全局事件globalEvent</span>
+            bus<span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'globalEvent'</span><span class="token punctuation">,</span>val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'brother2'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is brother2 compoent!&lt;/p&gt;
+            &lt;p&gt;brother1传递过来的数据：{{brothermessage}}&lt;/p&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span><span class="token string">'hello brother2'</span><span class="token punctuation">,</span>
+            brothermessage<span class="token punctuation">:</span><span class="token string">''</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// 绑定全局事件globalEvent</span>
+        bus<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'globalEvent'</span><span class="token punctuation">,</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>brothermessage<span class="token operator">=</span>val<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 使用一个中间站来触发事件</span>
+<span class="token keyword">var</span> bus <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;brother1&gt;&lt;/brother1&gt;
+            &lt;brother2&gt;&lt;/brother2&gt;
+        &lt;/div&gt;
+    `</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_4-provide-inject"><a href="#_4-provide-inject" aria-hidden="true" class="header-anchor">#</a> 4. provide/inject</h2><p>一种无依赖的组件通信方法：Vue.js 内置的 provide / inject 接口</p><div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'child'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    inject<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'for'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token comment">//得到父组件传递过来的数据</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">for</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;input type=&quot;tet&quot; v-model=&quot;mymessage&quot;&gt; 
+        &lt;/div&gt;
+    `</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'parent'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is parent compoent!&lt;/p&gt;
+            &lt;child&gt;&lt;/child&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    provide<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token string">'test'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            message<span class="token punctuation">:</span> <span class="token string">'hello'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;parent&gt;&lt;/parent&gt;
+        &lt;/div&gt;
+    `</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><ul><li>provide 和 inject 绑定并不是可响应的。如果传入一个可监听的对象，那么其对象的属性还是可响应的</li><li>只要一个组件使用了 provide 向下提供数据，那其下所有的子组件都可以通过 inject 来注入，不管中间隔了多少代，而且可以注入多个来自不同父级提供的数据。需要注意的是，一旦注入了某个数据，那这个组件中就不能再声明 这个数据了，因为它已经被父级占有</li><li>provide / inject API 主要解决了跨级组件间的通信问题，不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。</li></ul><div class="tip custom-block"><p class="custom-block-title">provide/inject无法解决</p><ul><li>父组件向子组件（支持跨级）传递数据</li><li>子组件向父组件（支持跨级）传递数据</li></ul></div><h2 id="_5-v-model"><a href="#_5-v-model" aria-hidden="true" class="header-anchor">#</a> 5. v-model</h2><p>父组件通过v-model传递值给子组件时，会自动传递一个value的prop属性，在子组件中通过this.$emit(‘input’,val)自动修改v-model绑定的值</p><div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'child'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    props<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        value<span class="token punctuation">:</span>String<span class="token punctuation">,</span> <span class="token comment">//v-model会自动传递一个字段为value的prop属性</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span><span class="token keyword">this</span><span class="token punctuation">.</span>value
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token function">changeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>mymessage<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 通过如此调用可以改变父组件上v-model绑定的值</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;mymessage&quot; @change=&quot;changeValue&quot;&gt; 
+        &lt;/div&gt;
+    `</span></span> 
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'parent'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is parent compoent!&lt;/p&gt;
+            &lt;p&gt;{{message}}&lt;/p&gt;
+            &lt;child v-model=&quot;message&quot;&gt;&lt;/child&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            message<span class="token punctuation">:</span><span class="token string">'hello'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;parent&gt;&lt;/parent&gt;
+        &lt;/div&gt;
+    `</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_6-ref-parent-children"><a href="#_6-ref-parent-children" aria-hidden="true" class="header-anchor">#</a> 6. ref/$parent/$children</h2><ul><li>ref <code>给元素或组件注册引用信息</code></li><li>$parent/$children <code>访问父/子实例</code>
+$parent 和 $children 类似，也是基于当前上下文访问父组件或全部子组件的。缺点是无法在跨级或兄弟间通信，比如我在component-a中无法访问parent.vue中的component-b组件</li></ul><div class="language-js extra-class"><pre class="language-js"><code>Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'child'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    props<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        value<span class="token punctuation">:</span>String<span class="token punctuation">,</span> <span class="token comment">//v-model会自动传递一个字段为value的prop属性</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            mymessage<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token function">changeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>$parent<span class="token punctuation">.</span>message <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>mymessage<span class="token punctuation">;</span><span class="token comment">//通过如此调用可以改变父组件的值</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;mymessage&quot; @change=&quot;changeValue&quot;&gt; 
+        &lt;/div&gt;
+    `</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'parent'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;p&gt;this is parent compoent!&lt;/p&gt;
+            &lt;button @click=&quot;changeChildValue&quot;&gt;test&lt;/button &gt;
+            {{message}}
+            &lt;child ref=&quot;child&quot;&gt;&lt;/child&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token function">changeChildValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>$children<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mymessage <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            message<span class="token punctuation">:</span><span class="token string">''</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span><span class="token template-string"><span class="token string">`
+        &lt;div&gt;
+            &lt;parent&gt;&lt;/parent&gt;
+        &lt;/div&gt;
+    `</span></span><span class="token punctuation">,</span>
+    <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> child <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>child
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_7-boradcast-dispatch"><a href="#_7-boradcast-dispatch" aria-hidden="true" class="header-anchor">#</a> 7. boradcast/dispatch</h2><p>一般都作为一个mixins去使用, broadcast是向特定的父组件触发事件，dispatch是向特定的子组件触发事件</p><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// emitter.js</span>
+<span class="token comment">// 这两个方法都接收了三个参数，第一个是组件的 name 值，用于向上或向下递归遍历来寻找对应的组件，第二个和第三个就是上文分析的自定义事件名称和要传递的数据</span>
+<span class="token comment">// 可以看到，在 dispatch 里，通过 while 语句，不断向上遍历更新当前组件（即上下文为当前调用该方法的组件）的父组件实例（变量 parent 即为父组件实例），直到匹配到定义的 componentName 与某个上级组件的 name 选项一致时，结束循环，并在找到的组件实例上，调用 $emit 方法来触发自定义事件 eventName。broadcast 方法与之类似，只不过是向下遍历寻找</span>
+<span class="token keyword">function</span> <span class="token function">broadcast</span><span class="token punctuation">(</span>componentName<span class="token punctuation">,</span> eventName<span class="token punctuation">,</span> params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$children<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>child <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> name <span class="token operator">=</span> child<span class="token punctuation">.</span>$options<span class="token punctuation">.</span>componentName<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>name <span class="token operator">===</span> componentName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            child<span class="token punctuation">.</span>$emit<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> <span class="token punctuation">[</span>eventName<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            broadcast<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> <span class="token punctuation">[</span>componentName<span class="token punctuation">,</span> eventName<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">dispatch</span><span class="token punctuation">(</span>componentName<span class="token punctuation">,</span> eventName<span class="token punctuation">,</span> params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$parent<span class="token punctuation">;</span>
+            <span class="token keyword">var</span> name <span class="token operator">=</span> parent<span class="token punctuation">.</span>$options<span class="token punctuation">.</span>componentName<span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>parent <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>name <span class="token operator">||</span> name <span class="token operator">!==</span> componentName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                parent <span class="token operator">=</span> parent<span class="token punctuation">.</span>$parent<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>parent<span class="token punctuation">)</span> name <span class="token operator">=</span> parent<span class="token punctuation">.</span>$options<span class="token punctuation">.</span>componentName<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>parent<span class="token punctuation">)</span> parent<span class="token punctuation">.</span>$emit<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>parent<span class="token punctuation">,</span> <span class="token punctuation">[</span>eventName<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token function">broadcast</span><span class="token punctuation">(</span>componentName<span class="token punctuation">,</span> eventName<span class="token punctuation">,</span> params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            broadcast<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> componentName<span class="token punctuation">,</span> eventName<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 有 A.vue 和 B.vue 两个组件，其中 B 是 A 的子组件，中间可能跨多级，在 A 中向 B 通信：</span>
+<span class="token comment">// A.vue</span>
+Emitter <span class="token keyword">from</span> <span class="token string">'emitter.js'</span>
+<span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">&quot;handleClick&quot;</span><span class="token operator">&gt;</span>触发事件<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    mixins<span class="token punctuation">:</span> <span class="token punctuation">[</span>Emitter<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;componentA&quot;</span><span class="token punctuation">;</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">broadcast</span><span class="token punctuation">(</span><span class="token string">'componentB'</span><span class="token punctuation">,</span> <span class="token string">'on-message'</span><span class="token punctuation">,</span> <span class="token string">'hahahaha'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// B.vue</span>
+<span class="token comment">// 同理，如果是 B 向 A 通信，在 B 中调用 dispatch 方法，在 A 中使用 $on 监听事件即可。</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;componentB&quot;</span><span class="token punctuation">;</span>
+    <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'on-message'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>showMessage<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">showMessage</span> <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div><div class="page-edit"><!----><!----></div><div class="page-nav"><p class="inner"><span class="prev">
+        ← <a href="/fe/vue/" class="prev router-link-active">
+          双向绑定原理
+        </a></span><span class="next"><a href="/fe/vue/seniorCom.html">
+          如何编写高级组件
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/assets/js/16.a18a4318.js" defer></script><script src="/assets/js/app.468cdc48.js" defer></script>
+  </body>
+</html>
