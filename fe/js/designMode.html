@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1. 单例模式 | Lck.blog</title>
+    <meta name="description" content="record what I want">
+    <link rel="icon" href="/images/lck.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/styles.8f0dc81e.css" as="style"><link rel="preload" href="/assets/js/app.8f0dc81e.js" as="script"><link rel="preload" href="/assets/js/16.6de63cc6.js" as="script"><link rel="prefetch" href="/assets/js/1.c2032add.js"><link rel="prefetch" href="/assets/js/10.c67e7d34.js"><link rel="prefetch" href="/assets/js/11.f4f3643c.js"><link rel="prefetch" href="/assets/js/12.93a9df87.js"><link rel="prefetch" href="/assets/js/13.bb8216ef.js"><link rel="prefetch" href="/assets/js/14.68c1cda7.js"><link rel="prefetch" href="/assets/js/15.52390de1.js"><link rel="prefetch" href="/assets/js/17.d913003c.js"><link rel="prefetch" href="/assets/js/18.19a93dd9.js"><link rel="prefetch" href="/assets/js/19.9e0f1f0a.js"><link rel="prefetch" href="/assets/js/2.c1916405.js"><link rel="prefetch" href="/assets/js/20.7242f631.js"><link rel="prefetch" href="/assets/js/21.f0d63d32.js"><link rel="prefetch" href="/assets/js/22.d387b9c8.js"><link rel="prefetch" href="/assets/js/23.f29027ac.js"><link rel="prefetch" href="/assets/js/24.9b7f547e.js"><link rel="prefetch" href="/assets/js/25.8bb6df85.js"><link rel="prefetch" href="/assets/js/26.a7830668.js"><link rel="prefetch" href="/assets/js/27.3f81e56b.js"><link rel="prefetch" href="/assets/js/28.67d57161.js"><link rel="prefetch" href="/assets/js/3.9f82c7f3.js"><link rel="prefetch" href="/assets/js/4.1d40e807.js"><link rel="prefetch" href="/assets/js/5.75d2cdbd.js"><link rel="prefetch" href="/assets/js/6.0a75455d.js"><link rel="prefetch" href="/assets/js/7.45416173.js"><link rel="prefetch" href="/assets/js/8.08900123.js"><link rel="prefetch" href="/assets/js/9.1a2b06f4.js">
+    <link rel="stylesheet" href="/assets/css/styles.8f0dc81e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Lck.blog
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/article/" class="nav-link">article</a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/article/" class="nav-link">article</a></div><!----></nav><!----></div><div class="page"><div class="content"><h2 id="_1-单例模式"><a href="#_1-单例模式" aria-hidden="true" class="header-anchor">#</a> 1. 单例模式</h2><p><code>保证一个类仅有一个实例， 并提供一个访问他的全局访问点</code></p><h3 id="_1-1-普通单例模式"><a href="#_1-1-普通单例模式" aria-hidden="true" class="header-anchor">#</a> 1-1 普通单例模式</h3><div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> <span class="token function-variable function">Singleton</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name
+    <span class="token keyword">this</span><span class="token punctuation">.</span>instance <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">Singleton</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">getName</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 通过Singleton.getInstance来获取Singleton类的唯一对象</span>
+<span class="token comment">// 缺点：不透明性</span>
+Singleton<span class="token punctuation">.</span><span class="token function-variable function">getInstance</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>instance<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>instance
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> a <span class="token operator">=</span> Singleton<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> Singleton<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token string">'B'</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a <span class="token operator">===</span> b<span class="token punctuation">)</span>    <span class="token comment">// true</span>
+</code></pre></div><h3 id="_1-2-透明的单例模式"><a href="#_1-2-透明的单例模式" aria-hidden="true" class="header-anchor">#</a> 1-2 透明的单例模式</h3></div><div class="page-edit"><!----><!----></div><!----></div></div></div>
+    <script src="/assets/js/app.8f0dc81e.js" defer></script><script src="/assets/js/16.6de63cc6.js" defer></script>
+  </body>
+</html>
